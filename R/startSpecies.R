@@ -89,19 +89,19 @@
 #' @export
 
 startSpecies <- function(..., spatialCovariates = NULL, 
-                      Projection, Mesh, 
-                      speciesSpatial = 'replicate', 
-                      speciesIntercept = TRUE, 
-                      speciesEnvironment = TRUE, 
-                      speciesName,
-                      IPS = NULL, Boundary = NULL, pointCovariates = NULL,
-                      Offset = NULL, pointsIntercept = TRUE, 
-                      pointsSpatial = 'copy', 
-                      responseCounts = 'counts', 
-                      responsePA = 'present', 
-                      trialsPA = NULL, temporalName = NULL,
-                      Formulas = list(covariateFormula = NULL,
-                                      biasFormula = NULL)) {
+                         Projection, Mesh, 
+                         speciesSpatial = 'replicate', 
+                         speciesIntercept = TRUE, 
+                         speciesEnvironment = TRUE, 
+                         speciesName,
+                         IPS = NULL, Boundary = NULL, pointCovariates = NULL,
+                         Offset = NULL, pointsIntercept = TRUE, 
+                         pointsSpatial = 'copy', 
+                         responseCounts = 'counts', 
+                         responsePA = 'present', 
+                         trialsPA = NULL, temporalName = NULL,
+                         Formulas = list(covariateFormula = NULL,
+                                         biasFormula = NULL)) {
   
   if (!is.null(Boundary) && !inherits(Boundary, c('sf', 'sfc'))) stop('Boundary needs to be an sf object.')
   
@@ -131,7 +131,8 @@ startSpecies <- function(..., spatialCovariates = NULL,
     
   }
   
-  dataPoints <- list(...)
+  isLists <- inherits(..., 'list')
+  if(!isLists){ dataPoints <- list(...)} else {dataPoints <- ... }
   
   #if (length(dataPoints) == 0) stop('Please provide data in the ... argument.')
   if (length(dataPoints) > 0) {
@@ -223,26 +224,26 @@ startSpecies <- function(..., spatialCovariates = NULL,
   }
   
   bruData <- specifySpecies$new(data = dataPoints, projection = Projection,
-                             Inlamesh = Mesh, initialnames = initialnames,
-                             responsecounts = responseCounts,
-                             responsepa = responsePA,
-                             pointcovariates = pointCovariates,
-                             trialspa = trialsPA,
-                             spatial = pointsSpatial,
-                             intercepts = pointsIntercept,
-                             spatialcovariates = spatialCovariates,
-                             boundary = Boundary,
-                             speciesindependent = FALSE, 
-                             speciesintercept = speciesIntercept,
-                             speciesname = speciesName, 
-                             speciesenvironment = speciesEnvironment, 
-                             speciesspatial = speciesSpatial,
-                             ips = IPS,
-                             temporal = temporalName,
-                             temporalmodel = temporalModel,
-                             offset = Offset,
-                             copymodel = copyModel,
-                             formulas = Formulas)
+                                Inlamesh = Mesh, initialnames = initialnames,
+                                responsecounts = responseCounts,
+                                responsepa = responsePA,
+                                pointcovariates = pointCovariates,
+                                trialspa = trialsPA,
+                                spatial = pointsSpatial,
+                                intercepts = pointsIntercept,
+                                spatialcovariates = spatialCovariates,
+                                boundary = Boundary,
+                                speciesindependent = FALSE, 
+                                speciesintercept = speciesIntercept,
+                                speciesname = speciesName, 
+                                speciesenvironment = speciesEnvironment, 
+                                speciesspatial = speciesSpatial,
+                                ips = IPS,
+                                temporal = temporalName,
+                                temporalmodel = temporalModel,
+                                offset = Offset,
+                                copymodel = copyModel,
+                                formulas = Formulas)
   
   bruData
   
